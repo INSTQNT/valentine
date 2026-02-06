@@ -153,10 +153,12 @@
       padding: 0 6px;
     }
 
+    /* Buttons row becomes the ONLY playground for the "No" button */
     .row{
       display:flex; gap: 12px; flex-wrap:wrap; justify-content:center;
       margin-top: 10px;
-      position: relative; /* for button clamp area */
+      position: relative;
+      min-height: 56px; /* ensures there's always room for absolute positioning */
     }
 
     .btn{
@@ -170,6 +172,7 @@
       user-select:none;
       touch-action: manipulation;
       position: relative;
+      z-index: 1;
     }
     .btn:active{ transform: translateY(1px) scale(.99); }
 
@@ -182,6 +185,10 @@
       background: rgba(255,255,255,.55);
       color: rgba(0,0,0,.72);
       border: 1px solid rgba(0,0,0,.08);
+
+      /* Important: "No" will be moved inside the buttons row */
+      position: absolute;
+      z-index: 2;
     }
 
     .status{ text-align:center; font-weight: 700; opacity: .85; margin-top: 10px; }
@@ -245,7 +252,7 @@
             <div class="seal"><b>✉️</b></div>
             <div style="font-weight:800; font-size:18px;">Open when ready</div>
             <div style="opacity:.8; margin-top:4px;">(yes, it actually opens)</div>
-            <button class="openBtn" id="openBtn">Open</button>
+            <button class="openBtn" id="openBtn" type="button">Open</button>
           </div>
 
           <div class="letter" id="letter">
@@ -256,8 +263,8 @@
             <div class="type" id="type"></div>
 
             <div class="row" id="buttons" style="display:none;">
-              <button class="btn" id="yes">Yes</button>
-              <button class="btn" id="no">No</button>
+              <button class="btn" id="yes" type="button">Yes</button>
+              <button class="btn" id="no" type="button">No</button>
             </div>
 
             <div class="status" id="status"></div>
@@ -320,7 +327,6 @@
     document.getElementById("nameChip").textContent = girlfriendName;
     document.getElementById("sig").textContent = `— ${yourName}`;
 
-    const envelope = document.getElementById("envelope");
     const openBtn = document.getElementById("openBtn");
     const closed = document.getElementById("closed");
     const letter = document.getElementById("letter");
@@ -369,6 +375,8 @@
         if(i >= lines.length){
           typing = false;
           buttons.style.display = "flex";
+          // place "No" once buttons are visible
+          setTimeout(() => moveNoButtonSafely(), 50);
           return;
         }
         const line = lines[i];
@@ -409,23 +417,25 @@
       "I’m not proud of this feature."
     ];
 
-    // Keep "No" inside the envelope area (clamped)
+    // ✅ FIX: Keep "No" inside the BUTTON ROW (not the whole envelope)
     function moveNoButtonSafely(){
-      const envRect = envelope.getBoundingClientRect();
+      const rowRect = buttons.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
-      const maxX = Math.max(0, envRect.width - btnRect.width - 24);
-      const maxY = Math.max(0, envRect.height - btnRect.height - 24);
+      const pad = 6;
+      const maxX = Math.max(0, rowRect.width - btnRect.width - pad*2);
+      const maxY = Math.max(0, rowRect.height - btnRect.height - pad*2);
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      const x = pad + Math.random() * maxX;
+      const y = pad + Math.random() * maxY;
 
-      // Use absolute positioning inside envelope
-      noBtn.style.position = "absolute";
+      // Position relative to the buttons row
+      buttons.style.position = "relative";
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
       noBtn.style.transform = "none";
       noBtn.style.transition = "left .14s ease, top .14s ease";
+      noBtn.style.zIndex = "2";
     }
 
     yesBtn.addEventListener("click", () => {
@@ -433,7 +443,7 @@
       confettiRain(70);
       dateBox.style.display = "grid";
       dateBox.style.gap = "10px";
-      noBtn.style.opacity = 0.55;
+      noBtn.style.opacity = 0.7;
     });
 
     noBtn.addEventListener("click", () => {
@@ -442,15 +452,10 @@
       moveNoButtonSafely();
     });
 
-    // First safe placement once buttons show
-    const observer = new MutationObserver(() => {
-      if(buttons.style.display !== "none"){
-        // Give layout a moment to settle
-        setTimeout(() => moveNoButtonSafely(), 50);
-        observer.disconnect();
-      }
+    // Re-clamp on window resize so it never ends up off-row
+    window.addEventListener("resize", () => {
+      if(buttons.style.display !== "none") moveNoButtonSafely();
     });
-    observer.observe(buttons, { attributes:true, attributeFilter:["style"] });
 
     document.querySelectorAll(".choice").forEach(el => {
       el.addEventListener("click", () => {
@@ -467,5 +472,3 @@
   </script>
 </body>
 </html>
-
-
