@@ -3,26 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>💌 A little question...</title>
+  <title>A question</title>
 
-  <!-- Cute font (optional). Works even if blocked; it falls back nicely. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#ffdde7;
-      --bg2:#c7f0ff;
-      --bg3:#fff2c6;
-      --card: rgba(255,255,255,.55);
-      --card2: rgba(255,255,255,.28);
-      --text:#2b2b2b;
+      --bg1:#ffe0ea;
+      --bg2:#cfefff;
+      --bg3:#fff5cf;
+      --card: rgba(255,255,255,.58);
+      --card2: rgba(255,255,255,.30);
+      --text:#222;
       --accent:#ff4d6d;
       --accent2:#6c63ff;
       --shadow: 0 22px 60px rgba(0,0,0,.18);
     }
-
     *{ box-sizing:border-box; }
     body{
       margin:0;
@@ -35,15 +33,13 @@
       background: radial-gradient(1200px 800px at 20% 20%, var(--bg1), transparent 60%),
                   radial-gradient(1100px 760px at 80% 30%, var(--bg2), transparent 60%),
                   radial-gradient(1000px 700px at 50% 85%, var(--bg3), transparent 60%),
-                  linear-gradient(120deg, #ffeef4, #e7fbff);
+                  linear-gradient(120deg, #fff1f6, #eafcff);
       animation: bgShift 12s ease-in-out infinite alternate;
     }
     @keyframes bgShift{
-      from { filter: hue-rotate(0deg) saturate(1.05); }
-      to   { filter: hue-rotate(14deg) saturate(1.12); }
+      from { filter: hue-rotate(0deg) saturate(1.02); }
+      to   { filter: hue-rotate(10deg) saturate(1.08); }
     }
-
-    /* sparkly overlay */
     .sparkles{
       position:fixed; inset:0;
       background-image:
@@ -51,23 +47,18 @@
         radial-gradient(circle at 70% 30%, rgba(255,255,255,.45) 0 2px, transparent 3px),
         radial-gradient(circle at 40% 70%, rgba(255,255,255,.40) 0 2px, transparent 3px),
         radial-gradient(circle at 90% 80%, rgba(255,255,255,.50) 0 2px, transparent 3px);
-      opacity:.35;
+      opacity:.25;
       mix-blend-mode: overlay;
       pointer-events:none;
       animation: twinkle 4.5s ease-in-out infinite alternate;
       transform: scale(1.2);
     }
     @keyframes twinkle{
-      from { opacity:.22; filter: blur(.2px); }
-      to { opacity:.45; filter: blur(.6px); }
+      from { opacity:.16; filter: blur(.2px); }
+      to { opacity:.32; filter: blur(.6px); }
     }
 
-    .wrap{
-      width:min(760px, 92vw);
-      padding: 18px;
-      position:relative;
-    }
-
+    .wrap{ width:min(760px, 92vw); padding:18px; position:relative; }
     .card{
       background: var(--card);
       border: 1px solid rgba(255,255,255,.55);
@@ -76,7 +67,6 @@
       backdrop-filter: blur(12px);
       overflow:hidden;
     }
-
     .top{
       padding: 22px 22px 10px;
       display:flex;
@@ -100,8 +90,8 @@
       place-items:center;
       width:28px; height:28px;
       border-radius: 999px;
-      background: rgba(255,77,109,.12);
-      border: 1px solid rgba(255,77,109,.20);
+      background: rgba(255,77,109,.10);
+      border: 1px solid rgba(255,77,109,.18);
     }
     .tiny{
       font-size: 13px;
@@ -110,22 +100,9 @@
       line-height:1.25;
     }
 
-    .content{
-      padding: 10px 22px 22px;
-      display:grid;
-      gap: 16px;
-    }
-
-    h1{
-      margin:0;
-      font-size: clamp(28px, 3.7vw, 40px);
-      line-height:1.1;
-    }
-    .sub{
-      margin:0;
-      font-size: 16px;
-      opacity:.85;
-    }
+    .content{ padding: 10px 22px 22px; display:grid; gap: 16px; }
+    h1{ margin:0; font-size: clamp(28px, 3.7vw, 40px); line-height:1.1; }
+    .sub{ margin:0; font-size: 16px; opacity:.85; }
 
     .panel{
       background: var(--card2);
@@ -133,11 +110,10 @@
       border-radius: 22px;
       padding: 18px;
       display:grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .envelope{
-      position:relative;
       width: 100%;
       max-width: 520px;
       margin: 6px auto 0;
@@ -150,15 +126,12 @@
       display:grid;
       place-items:center;
     }
-    .env-inner{
-      text-align:center;
-      padding: 18px;
-    }
+    .env-inner{ text-align:center; padding: 18px; }
     .seal{
       width: 62px; height: 62px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,77,109,.25)),
-                  linear-gradient(135deg, rgba(255,77,109,.8), rgba(108,99,255,.55));
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,77,109,.22)),
+                  linear-gradient(135deg, rgba(255,77,109,.75), rgba(108,99,255,.50));
       display:grid;
       place-items:center;
       border: 1px solid rgba(255,255,255,.7);
@@ -176,26 +149,21 @@
       cursor:pointer;
       background: linear-gradient(135deg, rgba(255,77,109,1), rgba(108,99,255,1));
       color:white;
-      box-shadow: 0 16px 30px rgba(255,77,109,.22);
+      box-shadow: 0 16px 30px rgba(255,77,109,.20);
       transition: transform .15s ease, filter .15s ease;
     }
     .openBtn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .openBtn:active{ transform: translateY(1px); }
 
-    .letter{
-      display:none;
-      animation: pop .35s ease both;
-    }
-    @keyframes pop{
-      from{ transform: translateY(10px) scale(.98); opacity:0; }
-      to{ transform: translateY(0) scale(1); opacity:1; }
-    }
+    .letter{ display:none; animation: pop .35s ease both; }
+    @keyframes pop{ from{ transform: translateY(10px) scale(.98); opacity:0; } to{ transform: translateY(0) scale(1); opacity:1; } }
 
     .type{
       font-size: 17px;
       line-height: 1.6;
-      min-height: 88px;
+      min-height: 96px;
       white-space: pre-wrap;
+      text-align:left;
     }
 
     .row{
@@ -203,9 +171,8 @@
       gap: 12px;
       flex-wrap:wrap;
       justify-content:center;
-      margin-top: 6px;
+      margin-top: 10px;
     }
-
     .btn{
       border: 0;
       border-radius: 999px;
@@ -221,7 +188,7 @@
     #yes{
       background: linear-gradient(135deg, rgba(255,77,109,1), rgba(255,140,170,1));
       color:white;
-      box-shadow: 0 16px 30px rgba(255,77,109,.22);
+      box-shadow: 0 16px 30px rgba(255,77,109,.20);
     }
     #no{
       background: rgba(255,255,255,.55);
@@ -229,26 +196,12 @@
       border: 1px solid rgba(0,0,0,.08);
     }
 
-    .status{
-      text-align:center;
-      font-weight: 700;
-      opacity: .85;
-    }
+    .status{ text-align:center; font-weight: 700; opacity: .85; }
 
-    .dateBox{
-      display:none;
-      margin-top: 10px;
-      gap: 10px;
-    }
-    .dateGrid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-    }
-    @media (max-width: 560px){
-      .dateGrid{ grid-template-columns: 1fr; }
-      .tiny{ display:none; }
-    }
+    .dateBox{ display:none; margin-top: 12px; gap: 10px; }
+    .dateGrid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+    @media (max-width: 560px){ .dateGrid{ grid-template-columns: 1fr; } .tiny{ display:none; } }
+
     .choice{
       background: rgba(255,255,255,.55);
       border: 1px solid rgba(255,255,255,.6);
@@ -273,12 +226,7 @@
       font-size: 12px;
     }
 
-    /* falling hearts confetti */
-    .confetti{
-      position:fixed; inset:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
+    .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; }
     .piece{
       position:absolute;
       font-size: 18px;
@@ -286,9 +234,7 @@
       animation: fall linear forwards;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
     }
-    @keyframes fall{
-      to { transform: translateY(115vh) rotate(360deg); opacity: 0; }
-    }
+    @keyframes fall{ to { transform: translateY(115vh) rotate(360deg); opacity: 0; } }
   </style>
 </head>
 
@@ -299,50 +245,52 @@
   <div class="wrap">
     <section class="card">
       <div class="top">
-        <div class="badge"><span>💗</span> A tiny page for <span id="nameChip">you</span></div>
+        <div class="badge"><span>💗</span> For <span id="nameChip">you</span></div>
         <div class="tiny" id="dateText"></div>
       </div>
 
       <div class="content">
         <div>
-          <h1>Okay… I have a question 🙈</h1>
-          <p class="sub">I tried to make this feel a little like *me*.</p>
+          <h1>I’m gonna be direct.</h1>
+          <p class="sub">I made this because texting it felt too boring.</p>
         </div>
 
-        <!-- Envelope -->
         <div class="envelope">
           <div class="env-inner" id="closed">
             <div class="seal"><b>✉️</b></div>
-            <div style="font-weight:800; font-size:18px;">You’ve got mail</div>
-            <div style="opacity:.8; margin-top:4px;">(Tap to open the letter)</div>
-            <button class="openBtn" id="openBtn">Open 💌</button>
+            <div style="font-weight:800; font-size:18px;">Open when ready</div>
+            <div style="opacity:.8; margin-top:4px;">(yes, I’m nervous)</div>
+            <button class="openBtn" id="openBtn">Open</button>
           </div>
 
           <div class="env-inner letter" id="letter">
-            <div style="font-weight:900; font-size:18px; margin-bottom:8px;">Dear <span id="name">love</span>,</div>
+            <div style="font-weight:900; font-size:18px; margin-bottom:8px;">
+              Hey <span id="name">there</span>,
+            </div>
+
             <div class="type" id="type"></div>
 
             <div class="row" id="buttons" style="display:none;">
-              <button class="btn" id="yes">Yes 😘</button>
-              <button class="btn" id="no">No 😠</button>
+              <button class="btn" id="yes">Yes</button>
+              <button class="btn" id="no">No</button>
             </div>
 
-            <div class="status" id="status" style="margin-top:10px;"> </div>
+            <div class="status" id="status" style="margin-top:10px;"></div>
 
             <div class="dateBox" id="dateBox">
-              <div style="text-align:center; font-weight:800;">Pick our little Valentine plan ✨</div>
+              <div style="text-align:center; font-weight:800;">Cool. Pick a vibe:</div>
               <div class="dateGrid">
-                <div class="choice" data-choice="Dinner">
-                  <b>🍝 Cozy dinner</b>
-                  <small>You + me + food + laughing too much.</small>
+                <div class="choice" data-choice="Call">
+                  <b>📞 A proper call/date night</b>
+                  <small>We plan a time, no distractions.</small>
                 </div>
                 <div class="choice" data-choice="Movie">
-                  <b>🎬 Movie night</b>
-                  <small>Blanket, snacks, and I’ll let you pick (mostly).</small>
+                  <b>🎬 Watch something together</b>
+                  <small>Same time, same movie, live reactions.</small>
                 </div>
-                <div class="choice" data-choice="Adventure">
-                  <b>🌙 Cute adventure</b>
-                  <small>A little walk + a surprise stop somewhere.</small>
+                <div class="choice" data-choice="Games">
+                  <b>🎮 Games + chaos</b>
+                  <small>Co-op, trash talk permitted.</small>
                 </div>
               </div>
             </div>
@@ -351,42 +299,39 @@
         </div>
 
         <div class="panel">
-          <div style="font-weight:800;">Tiny hint:</div>
+          <div style="font-weight:800;">Note:</div>
           <div style="opacity:.85">
-            If you click <b>Yes</b>, something sweet unlocks. If you click <b>No</b>, the button gets shy and tries to escape.
+            This is an online relationship right now, but I still want to do it properly.
           </div>
         </div>
       </div>
 
       <div class="footer">
-        <div>Made with ✨ and a little nervousness.</div>
+        <div>Made by someone who overthinks.</div>
         <div id="sig"></div>
       </div>
     </section>
   </div>
 
   <script>
-    // ✅ Customize these 4 things:
-    const girlfriendName = "Your Name Here";
-    const yourName = "Your Name";
+    // ✅ Customize these:
+    const girlfriendName = "Tinja";
+    const yourName = "Tobi";
     const valentineDate = "February 14";
     const introLines = [
-      "I wanted to do something small but personal...",
-      "Because you mean a lot to me.",
-      "And I like you. Like… a *lot*.",
+      "So… I like what we have.",
+      "And I want to keep building on it.",
       "",
-      "So here it is:",
-      "Will you be my Valentine? 💖"
+      "No big speech.",
+      "Just a real question:",
+      "Do you want to be my Valentine?"
     ];
 
-    // Optional: after she picks a date idea, open a WhatsApp message
-    // Put your number in international format, no plus sign, e.g. 4915112345678
-    const whatsappNumber = ""; // e.g. "4915........" or leave empty to disable
+    // Optional WhatsApp jump after picking an option:
+    const whatsappNumber = ""; // e.g. "4915112345678" (leave empty to disable)
 
-    // --- UI wiring ---
-    const dateText = document.getElementById("dateText");
-    dateText.textContent = `Valentine’s Day: ${valentineDate}`;
-
+    // --- UI ---
+    document.getElementById("dateText").textContent = `Valentine’s Day: ${valentineDate}`;
     document.getElementById("name").textContent = girlfriendName;
     document.getElementById("nameChip").textContent = girlfriendName;
     document.getElementById("sig").textContent = `— ${yourName}`;
@@ -402,25 +347,24 @@
     const dateBox = document.getElementById("dateBox");
     const confetti = document.getElementById("confetti");
 
-    function heartConfetti(count = 45){
-      const emojis = ["💗","💖","💘","💝","❤️","✨","💞"];
+    function confettiRain(count = 40){
+      const emojis = ["💗","💖","💘","❤️","✨"];
       for(let i=0;i<count;i++){
         const el = document.createElement("div");
         el.className = "piece";
         el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
         el.style.left = (Math.random()*100) + "vw";
         el.style.top = (-10 - Math.random()*20) + "vh";
-        el.style.animationDuration = (2.6 + Math.random()*2.6) + "s";
+        el.style.animationDuration = (2.6 + Math.random()*2.8) + "s";
         el.style.fontSize = (16 + Math.random()*14) + "px";
         confetti.appendChild(el);
         setTimeout(()=> el.remove(), 6500);
       }
     }
 
-    function typeLines(lines, speed=24){
+    function typeLines(lines, speed=22){
       typeEl.textContent = "";
       let i = 0, j = 0;
-
       function tick(){
         if(i >= lines.length){
           buttons.style.display = "flex";
@@ -428,10 +372,10 @@
         }
         const line = lines[i];
         if(j <= line.length){
-          typeEl.textContent = lines.slice(0,i).join("\n") + (i? "\n":"") + line.slice(0,j);
+          typeEl.textContent = lines.slice(0,i).join("\n") + (i ? "\n" : "") + line.slice(0,j);
           j++;
           setTimeout(tick, speed);
-        }else{
+        } else {
           i++; j = 0;
           setTimeout(tick, 220);
         }
@@ -442,25 +386,24 @@
     openBtn.addEventListener("click", () => {
       closed.style.display = "none";
       letter.style.display = "block";
-      heartConfetti(25);
+      confettiRain(20);
       typeLines(introLines);
     });
 
     let noCount = 0;
     const noMessages = [
-      "Are you sure? 😳",
-      "Wait… think again? 🥺",
-      "I’ll be extra cute though. 🍫",
-      "Okay but… I really hope you say yes. 😭",
-      "This button is getting embarrassed 🙈"
+      "Alright. Fair.",
+      "Still fair.",
+      "Okay but I had to try.",
+      "This button is committed now.",
+      "I’m not proud of this feature."
     ];
 
     yesBtn.addEventListener("click", () => {
-      status.textContent = "YES?! 😭💞 Okay I’m smiling so hard right now.";
-      heartConfetti(70);
+      status.textContent = "Nice. That made my day.";
+      confettiRain(70);
       dateBox.style.display = "grid";
       dateBox.style.gap = "10px";
-      // make No less tempting
       noBtn.style.opacity = 0.55;
     });
 
@@ -468,9 +411,9 @@
       status.textContent = noMessages[Math.min(noCount, noMessages.length - 1)];
       noCount++;
 
-      // shy escape move
-      const dx = (Math.random() * 160) - 80;
-      const dy = (Math.random() * 110) - 55;
+      // small shy move (not too annoying)
+      const dx = (Math.random() * 120) - 60;
+      const dy = (Math.random() * 80) - 40;
       noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
       noBtn.style.transition = "transform .14s ease";
     });
@@ -478,11 +421,11 @@
     document.querySelectorAll(".choice").forEach(el => {
       el.addEventListener("click", () => {
         const choice = el.getAttribute("data-choice");
-        heartConfetti(55);
-        status.textContent = `Perfect. 💘 It’s a ${choice} date. (I’m excited.)`;
+        confettiRain(55);
+        status.textContent = `Perfect. Let’s do: ${choice}.`;
 
         if(whatsappNumber){
-          const msg = encodeURIComponent(`I clicked YES 💖 — let's do: ${choice} for Valentine's!`);
+          const msg = encodeURIComponent(`I clicked YES — let's do: ${choice} for Valentine's 💖`);
           window.location.href = `https://wa.me/${whatsappNumber}?text=${msg}`;
         }
       });
@@ -490,4 +433,3 @@
   </script>
 </body>
 </html>
-
