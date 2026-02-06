@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💌 For You</title>
+  <style>
+    body { margin:0; font-family: system-ui, Arial; background: #0b0b10; color:#fff; display:grid; place-items:center; min-height:100vh; }
+    .card { width:min(680px, 92vw); background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+            border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+    h1 { margin: 0 0 10px; font-size: 34px; }
+    p { margin: 0 0 18px; line-height:1.5; opacity:.9; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; margin-top: 18px; }
+    button { border:0; border-radius: 999px; padding: 12px 16px; font-size:16px; cursor:pointer; }
+    #yes { background: #ff4d6d; color:white; }
+    #no  { background: rgba(255,255,255,.14); color:white; }
+    .footer { margin-top: 16px; font-size: 12px; opacity:.7; }
+    .hearts { position: fixed; inset: 0; pointer-events:none; overflow:hidden; }
+    .heart { position:absolute; font-size: 18px; animation: fall linear forwards; opacity:.9; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <h1>Hey <span id="name">love</span> 💖</h1>
+    <p>
+      I made this tiny page because I wanted to ask you in a cute way:
+      <b>Will you be my Valentine?</b>
+    </p>
+
+    <div class="row">
+      <button id="yes">Yes 💘</button>
+      <button id="no">No 🙈</button>
+    </div>
+
+    <p class="footer" id="status">Pick one 🙂</p>
+  </main>
+
+  <script>
+    // Customize these:
+    const girlfriendName = "Tinja";
+    const yesMessage = "YAY! 💞 I’m so happy. Screenshot this and send it to me 😄";
+    const noMessages = [
+      "Are you sure? 😳",
+      "Like… 100% sure? 🥺",
+      "Okay but what if I asked nicely? 🍫",
+      "Last chance… 😭",
+      "I’m going to pretend you didn’t click that 😌"
+    ];
+
+    document.getElementById("name").textContent = girlfriendName;
+
+    const status = document.getElementById("status");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    let noCount = 0;
+
+    function heartRain(count = 25) {
+      const wrap = document.getElementById("hearts");
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("div");
+        el.className = "heart";
+        el.textContent = ["💗","💖","💘","💝","❤️"][Math.floor(Math.random()*5)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.top = (-10 - Math.random()*30) + "vh";
+        el.style.animationDuration = (2.5 + Math.random()*2.5) + "s";
+        el.style.transform = `translateY(0) rotate(${Math.random()*180}deg)`;
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+    }
+
+    yesBtn.addEventListener("click", () => {
+      status.textContent = yesMessage;
+      heartRain(60);
+      // optional: open a message to you
+      // window.location.href = "https://wa.me/<YOURNUMBER>?text=Yes%20I%27ll%20be%20your%20Valentine%20%F0%9F%92%96";
+    });
+
+    noBtn.addEventListener("click", () => {
+      const msg = noMessages[Math.min(noCount, noMessages.length - 1)];
+      status.textContent = msg;
+      noCount++;
+
+      // make the "No" button scoot away a bit
+      const dx = (Math.random() * 120) - 60;
+      const dy = (Math.random() * 80) - 40;
+      noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+      noBtn.style.transition = "transform .15s ease";
+    });
+  </script>
+</body>
+</html>
