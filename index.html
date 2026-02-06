@@ -17,8 +17,6 @@
       --card: rgba(255,255,255,.58);
       --card2: rgba(255,255,255,.30);
       --text:#222;
-      --accent:#ff4d6d;
-      --accent2:#6c63ff;
       --shadow: 0 22px 60px rgba(0,0,0,.18);
     }
     *{ box-sizing:border-box; }
@@ -58,7 +56,7 @@
       to { opacity:.32; filter: blur(.6px); }
     }
 
-    .wrap{ width:min(760px, 92vw); padding:18px; position:relative; }
+    .wrap{ width:min(760px, 92vw); padding:18px; }
     .card{
       background: var(--card);
       border: 1px solid rgba(255,255,255,.55);
@@ -67,17 +65,13 @@
       backdrop-filter: blur(12px);
       overflow:hidden;
     }
+
     .top{
       padding: 22px 22px 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
     }
     .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
+      display:inline-flex; align-items:center; gap:10px;
       padding:10px 14px;
       background: rgba(255,255,255,.55);
       border: 1px solid rgba(255,255,255,.6);
@@ -86,19 +80,12 @@
       letter-spacing:.2px;
     }
     .badge span{
-      display:inline-grid;
-      place-items:center;
-      width:28px; height:28px;
-      border-radius: 999px;
+      display:inline-grid; place-items:center;
+      width:28px; height:28px; border-radius:999px;
       background: rgba(255,77,109,.10);
       border: 1px solid rgba(255,77,109,.18);
     }
-    .tiny{
-      font-size: 13px;
-      opacity: .75;
-      text-align:right;
-      line-height:1.25;
-    }
+    .tiny{ font-size:13px; opacity:.75; text-align:right; line-height:1.25; }
 
     .content{ padding: 10px 22px 22px; display:grid; gap: 16px; }
     h1{ margin:0; font-size: clamp(28px, 3.7vw, 40px); line-height:1.1; }
@@ -115,31 +102,29 @@
 
     .envelope{
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       margin: 6px auto 0;
-      aspect-ratio: 16 / 9;
       border-radius: 22px;
       background: rgba(255,255,255,.58);
       border: 1px solid rgba(255,255,255,.65);
       box-shadow: 0 12px 30px rgba(0,0,0,.10);
       overflow:hidden;
-      display:grid;
-      place-items:center;
+      padding: 18px;
+      position: relative;
     }
-    .env-inner{ text-align:center; padding: 18px; }
+
     .seal{
       width: 62px; height: 62px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 30%, #fff, rgba(255,77,109,.22)),
                   linear-gradient(135deg, rgba(255,77,109,.75), rgba(108,99,255,.50));
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       border: 1px solid rgba(255,255,255,.7);
       box-shadow: 0 10px 18px rgba(0,0,0,.12);
       margin: 0 auto 10px;
       transform: rotate(-6deg);
     }
-    .seal b{ font-size: 20px; color: rgba(0,0,0,.65); }
+
     .openBtn{
       margin-top: 10px;
       border: 0;
@@ -155,24 +140,25 @@
     .openBtn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .openBtn:active{ transform: translateY(1px); }
 
+    .closed, .letter { text-align:center; }
     .letter{ display:none; animation: pop .35s ease both; }
     @keyframes pop{ from{ transform: translateY(10px) scale(.98); opacity:0; } to{ transform: translateY(0) scale(1); opacity:1; } }
 
     .type{
       font-size: 17px;
       line-height: 1.6;
-      min-height: 96px;
+      min-height: 104px;
       white-space: pre-wrap;
       text-align:left;
+      padding: 0 6px;
     }
 
     .row{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      justify-content:center;
+      display:flex; gap: 12px; flex-wrap:wrap; justify-content:center;
       margin-top: 10px;
+      position: relative; /* for button clamp area */
     }
+
     .btn{
       border: 0;
       border-radius: 999px;
@@ -182,6 +168,8 @@
       font-weight: 800;
       transition: transform .12s ease;
       user-select:none;
+      touch-action: manipulation;
+      position: relative;
     }
     .btn:active{ transform: translateY(1px) scale(.99); }
 
@@ -196,7 +184,7 @@
       border: 1px solid rgba(0,0,0,.08);
     }
 
-    .status{ text-align:center; font-weight: 700; opacity: .85; }
+    .status{ text-align:center; font-weight: 700; opacity: .85; margin-top: 10px; }
 
     .dateBox{ display:none; margin-top: 12px; gap: 10px; }
     .dateGrid{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
@@ -217,10 +205,7 @@
 
     .footer{
       padding: 14px 22px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 12px;
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
       border-top: 1px solid rgba(255,255,255,.55);
       opacity: .78;
       font-size: 12px;
@@ -229,10 +214,10 @@
     .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; }
     .piece{
       position:absolute;
-      font-size: 18px;
       opacity:.95;
       animation: fall linear forwards;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
+      will-change: transform, opacity;
     }
     @keyframes fall{ to { transform: translateY(115vh) rotate(360deg); opacity: 0; } }
   </style>
@@ -255,16 +240,16 @@
           <p class="sub">I made this because texting it felt too boring.</p>
         </div>
 
-        <div class="envelope">
-          <div class="env-inner" id="closed">
+        <div class="envelope" id="envelope">
+          <div class="closed" id="closed">
             <div class="seal"><b>✉️</b></div>
             <div style="font-weight:800; font-size:18px;">Open when ready</div>
             <div style="opacity:.8; margin-top:4px;">(yes, I’m nervous)</div>
             <button class="openBtn" id="openBtn">Open</button>
           </div>
 
-          <div class="env-inner letter" id="letter">
-            <div style="font-weight:900; font-size:18px; margin-bottom:8px;">
+          <div class="letter" id="letter">
+            <div style="font-weight:900; font-size:18px; margin-bottom:8px; text-align:center;">
               Hey <span id="name">there</span>,
             </div>
 
@@ -275,7 +260,7 @@
               <button class="btn" id="no">No</button>
             </div>
 
-            <div class="status" id="status" style="margin-top:10px;"></div>
+            <div class="status" id="status"></div>
 
             <div class="dateBox" id="dateBox">
               <div style="text-align:center; font-weight:800;">Cool. Pick a vibe:</div>
@@ -294,14 +279,13 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
         <div class="panel">
           <div style="font-weight:800;">Note:</div>
           <div style="opacity:.85">
-            This is an online relationship right now, but I still want to do it properly.
+            This is online right now, but I still want to do it properly.
           </div>
         </div>
       </div>
@@ -319,11 +303,11 @@
     const yourName = "Tobi";
     const valentineDate = "February 14";
     const introLines = [
-      "So… I like what we have.",
-      "And I want to keep building on it.",
+      "This could’ve been a normal message.",
+      "But that felt a little boring.",
       "",
       "No big speech.",
-      "Just a real question:",
+      "So what's up?",
       "Do you want to be my Valentine?"
     ];
 
@@ -336,6 +320,7 @@
     document.getElementById("nameChip").textContent = girlfriendName;
     document.getElementById("sig").textContent = `— ${yourName}`;
 
+    const envelope = document.getElementById("envelope");
     const openBtn = document.getElementById("openBtn");
     const closed = document.getElementById("closed");
     const letter = document.getElementById("letter");
@@ -347,32 +332,50 @@
     const dateBox = document.getElementById("dateBox");
     const confetti = document.getElementById("confetti");
 
+    // Prevent double-open / double-typewriter bugs
+    let opened = false;
+    let typing = false;
+
+    // Confetti cap so it can't lag
+    const CONFETTI_CAP = 140;
+
     function confettiRain(count = 40){
       const emojis = ["💗","💖","💘","❤️","✨"];
       for(let i=0;i<count;i++){
+        if(confetti.childElementCount > CONFETTI_CAP) break;
+
         const el = document.createElement("div");
         el.className = "piece";
         el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+
         el.style.left = (Math.random()*100) + "vw";
         el.style.top = (-10 - Math.random()*20) + "vh";
         el.style.animationDuration = (2.6 + Math.random()*2.8) + "s";
         el.style.fontSize = (16 + Math.random()*14) + "px";
+
         confetti.appendChild(el);
         setTimeout(()=> el.remove(), 6500);
       }
     }
 
     function typeLines(lines, speed=22){
+      if(typing) return;
+      typing = true;
+
       typeEl.textContent = "";
       let i = 0, j = 0;
+
       function tick(){
         if(i >= lines.length){
+          typing = false;
           buttons.style.display = "flex";
           return;
         }
         const line = lines[i];
+
         if(j <= line.length){
-          typeEl.textContent = lines.slice(0,i).join("\n") + (i ? "\n" : "") + line.slice(0,j);
+          const prefix = lines.slice(0,i).join("\n");
+          typeEl.textContent = prefix + (i ? "\n" : "") + line.slice(0,j);
           j++;
           setTimeout(tick, speed);
         } else {
@@ -384,6 +387,8 @@
     }
 
     openBtn.addEventListener("click", () => {
+      if(opened) return;
+      opened = true;
       closed.style.display = "none";
       letter.style.display = "block";
       confettiRain(20);
@@ -395,9 +400,33 @@
       "Alright. Fair.",
       "Still fair.",
       "Okay but I had to try.",
-      "This button is committed now.",
+      "I respect the honesty.",
+      "This button is doing its own thing now."
+      "The button is panicking a little."
+      "Okay, noted.",
+      "Message received.",
+      "I respect that.",
       "I’m not proud of this feature."
     ];
+
+    // Keep "No" inside the envelope area (clamped)
+    function moveNoButtonSafely(){
+      const envRect = envelope.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = Math.max(0, envRect.width - btnRect.width - 24);
+      const maxY = Math.max(0, envRect.height - btnRect.height - 24);
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      // Use absolute positioning inside envelope
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.style.transform = "none";
+      noBtn.style.transition = "left .14s ease, top .14s ease";
+    }
 
     yesBtn.addEventListener("click", () => {
       status.textContent = "Nice. That made my day.";
@@ -410,13 +439,18 @@
     noBtn.addEventListener("click", () => {
       status.textContent = noMessages[Math.min(noCount, noMessages.length - 1)];
       noCount++;
-
-      // small shy move (not too annoying)
-      const dx = (Math.random() * 120) - 60;
-      const dy = (Math.random() * 80) - 40;
-      noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
-      noBtn.style.transition = "transform .14s ease";
+      moveNoButtonSafely();
     });
+
+    // First safe placement once buttons show
+    const observer = new MutationObserver(() => {
+      if(buttons.style.display !== "none"){
+        // Give layout a moment to settle
+        setTimeout(() => moveNoButtonSafely(), 50);
+        observer.disconnect();
+      }
+    });
+    observer.observe(buttons, { attributes:true, attributeFilter:["style"] });
 
     document.querySelectorAll(".choice").forEach(el => {
       el.addEventListener("click", () => {
